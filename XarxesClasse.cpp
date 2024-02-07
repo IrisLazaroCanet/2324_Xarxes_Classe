@@ -1,22 +1,132 @@
-// XarxesClasse.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <conio.h>
 #include <SFML/Network.hpp>
+
+void RunClient();
+void RunServer();
 
 int main()
 {
-    std::cout << "Hello World!\n";
-    sf::TcpSocket socket;
+    std::cout << "Select" << std::endl << "Client -> C" << std::endl << "Server -> S" << std::endl;
+
+    char mode = ' ';
+
+    do
+    {
+        if (_kbhit())
+        {
+            mode = _getch();
+        }
+    } while (mode != 'C' && mode != 'c' && mode != 'S' && mode != 's');
+
+    switch (mode)
+    {
+        case 'C' :
+        case 'c':
+        {
+            RunClient();
+            break;
+        }
+        case 'S':
+        case 's':
+        {
+            RunServer();
+            break;
+        }
+        default:
+        {
+            break;
+        }
+    }
+
+    while (true)
+    {
+
+    }
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+void RunClient()
+{
+    std::cout << "Client" << std::endl;
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+    sf::TcpSocket socket;
+    sf::Socket::Status status = socket.connect("172.31.98.147", 3000);
+
+    if (status != sf::Socket::Done)
+    {
+        std::cout << "Error on connect to Server" << std::endl;
+        return;
+    }
+
+    while (true)
+    {
+        std::cout << "Next Message: " << std::endl;
+        std::string message;
+        std::getline(std::cin, message);
+        
+        char data[100];
+        int stringSize = message.length();
+        for (int i = 0; i < stringSize; i++)
+        {
+            char c = message[i];
+            data[i] = c;
+        }
+
+        if (socket.send(data, 100) != sf::Socket::Status::Done)
+        {
+            std::cout << "Error on sending message" << std::endl;
+        }
+    }
+}
+
+void RunServer()
+{
+    std::cout << "Server" << std::endl;
+    
+    //Crear un listener para escuchar las conexiones
+    sf::TcpListener listener;
+
+    //listen() devuelve si ha funcionado o no.
+    //Ponerse a escuchar no da los sockets todavía, hay que aceptar la entrada de los sockets.
+    if (listener.listen(3000) != sf::Socket::Done)
+    {
+        std::cout << "Error on start listener" << std::endl;
+        return;
+    }
+
+    sf::IpAddress ipAddress = sf::IpAddress::getLocalAddress();
+    std::cout << "Listening on IP: " + ipAddress.toString() << std::endl;
+    
+    sf::TcpSocket client;
+
+    if (listener.accept(client) != sf::Socket::Done)
+    {
+        std::cout << "Error on accept Client" << std::endl;
+        return;
+    }
+
+    std::cout << "Client Connected: " << client.getRemoteAddress().toString() << std::endl;
+
+    while (true)
+    {
+        char data[100];
+        std::size_t received;
+        std::string message;
+
+        if (client.receive(data, 100, received) != sf::Socket::Done)
+        {
+            std::cout << "Error on receiving message" << std::endl;
+        }
+        else
+        {
+            for (size_t i = 0; i < received; i++)
+            {
+                char c = data[i];
+                message += c;
+            }
+
+            std::cout << message << std::endl;
+        }
+    }
+
+}
