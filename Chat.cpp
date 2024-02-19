@@ -116,21 +116,22 @@ void Chat::ListenMessages(sf::TcpSocket* socket)
 {
     while (true)
     {
-        char data[100] = {};
-        std::size_t received;
+        //No té sentit que sigui un punter; és informació plana que llegim (no la volem modificar directament)
+        //Si volem, ja la posarem dins una classe que utilitzi punters.
+        sf::Packet packet;
         std::string message;
 
-        if (socket->receive(data, 100, received) != sf::Socket::Done)
+        if (socket->receive(packet) != sf::Socket::Done)
         {
             ShowError("Error on receiving message");
         }
         else
         {
-            for (size_t i = 0; i < received; i++)
-            {
-                char c = data[i];
-                message += c;
-            }
+            //Desempaquetar (del package treu la informació cap al message).
+            //Ho fa per ordre: si introduïm més d'un objecte en un package, els hem de treure en el mateix ordre que els introduïm
+            //L'operador >> retorna un packet: el mateix. Això ens permet concatenar coses
+            //(retornar-se a si mateix per poder concatenar les coses sense haver de fer packet >> ... múltiples cops).
+            packet >> message;
 
             ShowMessage(message);
 
@@ -177,19 +178,14 @@ void Chat::ListenKeyboardToSendMessage()
 
 void Chat::SendMessage(std::string message)
 {
-    char data[100] = {};
-    int stringSize = message.length();
-    for (int i = 0; i < stringSize; i++)
-    {
-        char c = message[i];
-        data[i] = c;
-    }
+    sf::Packet packet;
+    packet << message;
 
     _socketsMutex.lock();
 
     for (sf::TcpSocket* socket : _sockets)
     {
-        if (socket->send(data, 100) != sf::Socket::Status::Done)
+        if (socket->send(packet) != sf::Socket::Status::Done)
         {
             ShowError("Error on sending message");
         }
