@@ -11,7 +11,7 @@ class TcpSocket : public sf::TcpSocket
 {
 public:
 	//Li deleguem la feina a la persona que posa aquesta lambda
-	//La feina de etreure la informació del package se la deleguem a qui se suposa que sap què ha de decodificar
+	//La feina de treure la informació del package se la deleguem a qui se suposa que sap què ha de decodificar
 	//(ex un message enlloc d'una carta).
 	typedef std::function<void(Packet packet)> OnReceivePacket;
 
@@ -22,9 +22,11 @@ public:
 	bool Connect(std::string ip, unsigned short port);
 	void Receive();
 
+	//Aquestes funcions les cridarà qui utilitzi la nostra llibreria (el joc, que decidirà quan cridar el send)
 	//Fem dues perquè quan estem treballant amb online (comunicació per comandes), hi ha vegades que només sabent de quin
 	//socket és i sabent que vol fer algo, no ens cal informació addicional.
 	bool Send(Packet::PacketKey key);
+	//La segona funció és per si SÍ volem enviar informació addicional.
 	bool Send(Packet::PacketKey key, Packet packet);
 
 	//Key amb funció lambda que espera que rebi el packet
@@ -32,9 +34,12 @@ public:
 
 	//Com treballem amb mutex, es pot donar el cas que bloquegem el mutex, i que executem coses.
 	//Pot ser que aquestes coses també vulguin fer servir el mateix mutex. 
+	//Pot ser que vulguem subscriure'ns a un missatge en funció de l'arribada d'un altre missatge.
 	void SubscribeAsync(Packet::PacketKey key, OnReceivePacket onReceivePacket);
 
 	void SubscribeOnDisconnect(OnSocketDisconnect onSocketDisconnect);
+
+	//TODO: Funcions per dessubscribir-se
 
 private:
 	std::map<Packet::PacketKey, OnReceivePacket> _subscriptions;

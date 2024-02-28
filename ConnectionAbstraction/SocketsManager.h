@@ -46,6 +46,5 @@ private:
 	void AddSocket(TcpSocket* socket);
 	void RemoveSocket(TcpSocket* socket);
 	void RemoveSocketAsync(TcpSocket* socket);
-
 };
 
