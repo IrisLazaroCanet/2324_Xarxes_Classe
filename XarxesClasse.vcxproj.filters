@@ -74,5 +74,8 @@
     <ClInclude Include="WindowsHelpers\Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Chess\Protocol.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
