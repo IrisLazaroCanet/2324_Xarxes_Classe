@@ -112,5 +112,24 @@ void Window::RunWindowsLoop()
 				}
 			}
 		}
+
+		//Execute all tasks
+		_taskMutex.lock();
+		size_t size = _tasks.size();
+		for (int i = 0; i < size; i++)
+		{
+			_tasks[i]();
+		}
+		//Com que són tasques d'un sol ús, cal netejar la llista després del for (ja s'han executat les tasques)
+		_tasks.clear();
+		_taskMutex.unlock();
 	}
 }
+
+void Window::AddTask(Task task)
+{
+	_taskMutex.lock();
+	_tasks.push_back(task);
+	_taskMutex.unlock();
+}
+

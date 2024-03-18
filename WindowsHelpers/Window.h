@@ -19,7 +19,15 @@ public:
 	void AddButton(Button* bt);
 	void RunWindowsLoop();
 
+	//LAMBDA TASKS
+	typedef std::function<void()> Task;
+	void AddTask(Task task);
+
 private:
+	//LAMBDA TASKS
+	std::mutex _taskMutex;
+	std::vector<Task> _tasks;
+
 	//Posar un mutex global per tot el sistema de finestres funciona, però no és el més eficient:
 	//mentre aquest mutex estigui bloquejat, no podrem fer res més
 	//TODO: Crear més mutex
