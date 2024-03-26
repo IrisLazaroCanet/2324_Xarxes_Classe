@@ -9,6 +9,7 @@ public:
 	//Opcionalment, podria rebre si és el botó esquerre o el dret del ratolí, el sender (qui ha desencadenat la lambda,
 	//per exemple, quin botó: ens serviria si tinguéssim una sola lambda i la volguéssim passar a 3 botons diferents)
 	typedef std::function<void()> OnClick;
+	typedef std::function<void()> OnHoverEntered;
 
 	//La funció lambda no s'executa en el context d'una classe. La podem crear des de qualsevol lloc (és genèrica).
 	//Si volem fer servir objectes de la classe on està declarada, hem de passar-li referències, per exemple [this]
@@ -22,6 +23,7 @@ public:
 	//() = els paràmetres de la funció
 	//{} = el codi que fa la funció
 	OnClick onClick = [](){};
+	OnHoverEntered onHoverEntered = [](){};
 
 	//No li passem width ni height perquè per defecte agafem els de la textura
 	//Considerar la possibilitat de passar-li la textura ja carregada.
@@ -35,8 +37,11 @@ public:
 	/// <param name="y"></param>
 	/// <returns></returns>
 	bool CheckBounds(unsigned int x, unsigned int y);
+	bool IsHovered() { return isHovered; }
+	void ChangeHovered() { isHovered = !isHovered; }
 
 private:
 	sf::Texture texture;
+	bool isHovered;
 };
 

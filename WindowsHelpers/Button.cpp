@@ -14,6 +14,7 @@ Button::Button(float x, float y, std::string texturePath)
 	//setPostion ve heredada de Transformable. SFML està preparada per fer jocs i té el sistema de Transform
 	this->setPosition(x, y);
 	this->setTexture(texture);
+	isHovered = false;
 }
 
 bool Button::CheckBounds(unsigned int x, unsigned int y)

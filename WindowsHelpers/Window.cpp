@@ -105,6 +105,28 @@ void Window::RunWindowsLoop()
 					}
 					break;
 				}
+				case sf::Event::MouseMoved:
+				{
+					sf::Vector2i clickPixelPos = { event.mouseMove.x, event.mouseMove.y };
+					sf::Vector2f worldPos = _window.mapPixelToCoords(clickPixelPos);
+
+					for (auto it = _buttons.rbegin(); it != _buttons.rend(); it++)
+					{
+						Button* bt = *it;
+						if (bt->CheckBounds(worldPos.x, worldPos.y) && !bt->IsHovered())
+						{
+							bt->onHoverEntered();
+							bt->ChangeHovered();
+							break;
+						}
+						else if (!bt->CheckBounds(worldPos.x, worldPos.y) && bt->IsHovered())
+						{
+							bt->ChangeHovered();
+							break;
+						}
+					}
+					break;
+				}
 				case sf::Event::MouseWheelScrolled:
 				{
 					//TODO: Handle MouseWheelScrolled

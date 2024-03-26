@@ -244,6 +244,9 @@ void RunWindows()
     bt->onClick = []() {
         std::cout << std::endl << "Long Live the Queen" << std::endl;
     };
+    bt->onHoverEntered = []() {
+        std::cout << std::endl << "On Hover Entered" << std::endl;
+    };
 
     window.AddButton(bt);
     window.RunWindowsLoop();
