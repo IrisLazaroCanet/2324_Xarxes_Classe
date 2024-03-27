@@ -259,22 +259,18 @@ void RunWindows()
             }
         }
     };
-    
-    Task addPieces = [&]() {
-
-    };
 
     window.AddTask(drawBoard);
 
 
-    Button* bt = new Button(0, 75, "Pieces/QG.png");
+    Button* bt = new Button(0, 600/8, "Pieces/QG.png");
 
     bt->onClick = []() {
-        std::cout << std::endl << "Long Live the Queen" << std::endl;
+        std::cout << "Long Live the Queen" << std::endl;
     };
 
     bt->onHoverEnter = [&]() {
-        std::cout << std::endl << "On Hover Enter" << std::endl;
+        std::cout << "On Hover Enter" << std::endl;
         Task showPossiblePositions = [&]() {
 
             for (int i = 0; i < 3; i++)
