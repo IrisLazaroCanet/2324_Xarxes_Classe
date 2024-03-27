@@ -23,6 +23,27 @@ void Window::AddButton(Button* bt)
 	_mutex.unlock();
 }
 
+void Window::AddDrawable(sf::Drawable* drawable)
+{
+	_mutex.lock();
+	_objectsToDraw.push_front(drawable);
+	_mutex.unlock();
+}
+
+void Window::AddTempDrawable(sf::Drawable* tempDrawable)
+{
+	_mutex.lock();
+	_tempObjectsToDraw.push_front(tempDrawable);
+	_mutex.unlock();
+}
+
+void Window::ClearTempDrawables()
+{
+	_mutex.lock();
+	_tempObjectsToDraw.clear();
+	_mutex.unlock();
+}
+
 void Window::RunWindowsLoop()
 {
 	//TODO: Fer aquesta funció thread safe
@@ -44,6 +65,14 @@ void Window::RunWindowsLoop()
 				//Tècnicament no està pintant per pantalla.
 				//Està pintant al Z-Buffer de debò, l'intern.
 				_window.draw(*drawable);
+			}
+		}
+
+		for (sf::Drawable* tempDrawable : _tempObjectsToDraw)
+		{
+			if (tempDrawable != nullptr)
+			{
+				_window.draw(*tempDrawable);
 			}
 		}
 
@@ -115,12 +144,13 @@ void Window::RunWindowsLoop()
 						Button* bt = *it;
 						if (bt->CheckBounds(worldPos.x, worldPos.y) && !bt->IsHovered())
 						{
-							bt->onHoverEntered();
+							bt->onHoverEnter();
 							bt->ChangeHovered();
 							break;
 						}
 						else if (!bt->CheckBounds(worldPos.x, worldPos.y) && bt->IsHovered())
 						{
+							bt->onHoverExit();
 							bt->ChangeHovered();
 							break;
 						}

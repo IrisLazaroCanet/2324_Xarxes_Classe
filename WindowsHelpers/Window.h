@@ -3,6 +3,11 @@
 #include <mutex>
 #include "Button.h"
 
+typedef std::function<void()> Task;
+
+#define WINDOW_WIDTH = 800
+#define WINDOW_HEIGHT = 800
+
 class Window
 {
 	//TODO: Crear sistema de dispatcher
@@ -17,10 +22,12 @@ public:
 	Window(unsigned int width = 800, unsigned int height = 600, std::string title = "Window");
 
 	void AddButton(Button* bt);
+	void AddDrawable(sf::Drawable* drawable);
+	void AddTempDrawable(sf::Drawable* tempDrawable);
+	void ClearTempDrawables();
 	void RunWindowsLoop();
 
 	//LAMBDA TASKS
-	typedef std::function<void()> Task;
 	void AddTask(Task task);
 
 private:
@@ -40,5 +47,7 @@ private:
 	//Tècnicament, com que el botó és drawable, podríem posar-lo aquí.
 	//Però no seria eficient, ja que quan volguéssim comprovar si s'ha clicat un botó hauríem d'iterar per tots els drawables
 	std::list<sf::Drawable*> _objectsToDraw;
+
+	std::list<sf::Drawable*> _tempObjectsToDraw;
 };
 

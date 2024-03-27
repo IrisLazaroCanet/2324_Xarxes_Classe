@@ -239,14 +239,66 @@ void RunWindows()
     */
 
     Window window;
+
+
+    Task drawBoard = [&]() {
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                sf::RectangleShape* square = new sf::RectangleShape(sf::Vector2f(600 / 8, 600 / 8));
+
+                if ((i % 2 == 0 && j % 2 == 0) || (i% 2 == 1 && j % 2 == 1))
+                    square->setFillColor(sf::Color::White);
+                else
+                    square->setFillColor(sf::Color::Blue);
+
+                square->setPosition(i * 600/8, j * 600/8);
+
+                window.AddDrawable(square);
+            }
+        }
+    };
     
-    Button* bt = new Button(50, 20, "Pieces/QG.png");
+    Task addPieces = [&]() {
+
+    };
+
+    window.AddTask(drawBoard);
+
+
+    Button* bt = new Button(0, 75, "Pieces/QG.png");
+
     bt->onClick = []() {
         std::cout << std::endl << "Long Live the Queen" << std::endl;
     };
-    bt->onHoverEntered = []() {
-        std::cout << std::endl << "On Hover Entered" << std::endl;
+
+    bt->onHoverEnter = [&]() {
+        std::cout << std::endl << "On Hover Enter" << std::endl;
+        Task showPossiblePositions = [&]() {
+
+            for (int i = 0; i < 3; i++)
+            {
+                sf::RectangleShape* possiblePosition = new sf::RectangleShape(sf::Vector2f(600 / 8, 600 / 8));
+                possiblePosition->setFillColor(sf::Color(255, 0, 0, 100));
+                possiblePosition->setPosition(i * 600 / 8, 600 / 8);
+                window.AddTempDrawable(possiblePosition);
+
+            }
+        };
+
+        window.AddTask(showPossiblePositions);
     };
+
+    bt->onHoverExit = [&]() {
+        std::cout << "On Hover Exit" << std::endl;
+        Task clearPossiblePositions = [&]() {
+            window.ClearTempDrawables();
+        };
+
+        window.AddTask(clearPossiblePositions);
+    };
+    
 
     window.AddButton(bt);
     window.RunWindowsLoop();
