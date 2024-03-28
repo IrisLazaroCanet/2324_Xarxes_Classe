@@ -262,14 +262,32 @@ void RunWindows()
 
     window.AddTask(drawBoard);
 
+    Button* bt = new Button(0, 600 / 8, "Pieces/QG.png");
 
-    Button* bt = new Button(0, 600/8, "Pieces/QG.png");
-
-    bt->onClick = []() {
+    //Store lambdas (to reuse and reassign them later)
+    std::function<void()> click_selectPiece = [&]() {
         std::cout << "Long Live the Queen" << std::endl;
+
+        Task highlightSelectedPosition = [&]() {
+
+            sf::RectangleShape* selectedPosition = new sf::RectangleShape(sf::Vector2f(600 / 8, 600 / 8));
+            selectedPosition->setFillColor(sf::Color(255, 0, 0, 200));
+            selectedPosition->setPosition(bt->getPosition());
+            window.AddTempDrawable(selectedPosition);
+        };
+
+        window.AddTask(highlightSelectedPosition);
+
+        //Reset onHoverExit so highlighted cells don't disappear
+        bt->onHoverExit = []() {};
+
+        //Reset onHoverEnter so to prevent highlight overlap
+        bt->onHoverEnter = []() {};
+
+        bt->onClick = []() {};
     };
 
-    bt->onHoverEnter = [&]() {
+    std::function<void()> hoverEnter_highlightPositions = [&]() {
         std::cout << "On Hover Enter" << std::endl;
         Task showPossiblePositions = [&]() {
 
@@ -286,7 +304,7 @@ void RunWindows()
         window.AddTask(showPossiblePositions);
     };
 
-    bt->onHoverExit = [&]() {
+    std::function<void()> hoverExit_clearPositions = [&]() {
         std::cout << "On Hover Exit" << std::endl;
         Task clearPossiblePositions = [&]() {
             window.ClearTempDrawables();
@@ -294,7 +312,26 @@ void RunWindows()
 
         window.AddTask(clearPossiblePositions);
     };
-    
+
+    std::function<void()> click_deselectPiece = [&]() {
+        std::cout << "The Queen is dead" << std::endl;
+
+        Task clearSelectedPosition = [&]() {
+            window.ClearTempDrawables();
+        };
+
+        window.AddTask(clearSelectedPosition);
+
+        //Restore default click and hover lambdas
+        bt->onClick = click_selectPiece;
+        bt->onHoverEnter = hoverEnter_highlightPositions;
+        bt->onHoverExit = hoverExit_clearPositions;
+    };
+
+    //Set default lambdas
+    bt->onClick = click_selectPiece;
+    bt->onHoverEnter = hoverEnter_highlightPositions;
+    bt->onHoverExit = hoverExit_clearPositions;
 
     window.AddButton(bt);
     window.RunWindowsLoop();
