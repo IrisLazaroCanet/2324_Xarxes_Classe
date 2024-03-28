@@ -2,13 +2,15 @@
 #include <SFML/Graphics.hpp>
 #include <functional>
 
+typedef std::function<void()> OnClick;
+
 class Button : public sf::Sprite
 {
 public:
 	//Void perquè quan cliquem al botó no retorna res
 	//Opcionalment, podria rebre si és el botó esquerre o el dret del ratolí, el sender (qui ha desencadenat la lambda,
 	//per exemple, quin botó: ens serviria si tinguéssim una sola lambda i la volguéssim passar a 3 botons diferents)
-	typedef std::function<void()> OnClick;
+	
 
 	//La funció lambda no s'executa en el context d'una classe. La podem crear des de qualsevol lloc (és genèrica).
 	//Si volem fer servir objectes de la classe on està declarada, hem de passar-li referències, per exemple [this]
