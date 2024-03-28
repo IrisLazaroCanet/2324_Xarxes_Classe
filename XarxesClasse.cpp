@@ -264,8 +264,11 @@ void RunWindows()
 
     Button* bt = new Button(0, 600 / 8, "Pieces/QG.png");
 
+
+    std::function<int(const std::string&)> lambda = [](const std::string& s) { return std::stoi(s); };
+
     //Store lambdas (to reuse and reassign them later)
-    std::function<void()> click_selectPiece = [&]() {
+    std::function<void(OnClick onClick)> click_selectPiece = [&](OnClick onClick) {
         std::cout << "Long Live the Queen" << std::endl;
 
         Task highlightSelectedPosition = [&]() {
@@ -284,10 +287,10 @@ void RunWindows()
         //Reset onHoverEnter so to prevent highlight overlap
         bt->onHoverEnter = []() {};
 
-        bt->onClick = []() {};
+        bt->onClick = onClick;
     };
 
-    std::function<void()> hoverEnter_highlightPositions = [&]() {
+    OnHoverEnter hoverEnter_highlightPositions = [&]() {
         std::cout << "On Hover Enter" << std::endl;
         Task showPossiblePositions = [&]() {
 
@@ -304,7 +307,7 @@ void RunWindows()
         window.AddTask(showPossiblePositions);
     };
 
-    std::function<void()> hoverExit_clearPositions = [&]() {
+    OnHoverExit hoverExit_clearPositions = [&]() {
         std::cout << "On Hover Exit" << std::endl;
         Task clearPossiblePositions = [&]() {
             window.ClearTempDrawables();
@@ -329,7 +332,7 @@ void RunWindows()
     };
 
     //Set default lambdas
-    bt->onClick = click_selectPiece;
+    bt->onClick = click_selectPiece(click_deselectPiece);
     bt->onHoverEnter = hoverEnter_highlightPositions;
     bt->onHoverExit = hoverExit_clearPositions;
 
