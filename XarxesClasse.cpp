@@ -265,31 +265,9 @@ void RunWindows()
     Button* bt = new Button(0, 600 / 8, "Pieces/QG.png");
 
 
-    std::function<int(const std::string&)> lambda = [](const std::string& s) { return std::stoi(s); };
+    //std::function<int(const std::string&)> lambda = [](const std::string& s) { return std::stoi(s); };
 
     //Store lambdas (to reuse and reassign them later)
-    std::function<void(OnClick onClick)> click_selectPiece = [&](OnClick onClick) {
-        std::cout << "Long Live the Queen" << std::endl;
-
-        Task highlightSelectedPosition = [&]() {
-
-            sf::RectangleShape* selectedPosition = new sf::RectangleShape(sf::Vector2f(600 / 8, 600 / 8));
-            selectedPosition->setFillColor(sf::Color(255, 0, 0, 200));
-            selectedPosition->setPosition(bt->getPosition());
-            window.AddTempDrawable(selectedPosition);
-        };
-
-        window.AddTask(highlightSelectedPosition);
-
-        //Reset onHoverExit so highlighted cells don't disappear
-        bt->onHoverExit = []() {};
-
-        //Reset onHoverEnter so to prevent highlight overlap
-        bt->onHoverEnter = []() {};
-
-        bt->onClick = onClick;
-    };
-
     OnHoverEnter hoverEnter_highlightPositions = [&]() {
         std::cout << "On Hover Enter" << std::endl;
         Task showPossiblePositions = [&]() {
@@ -316,7 +294,30 @@ void RunWindows()
         window.AddTask(clearPossiblePositions);
     };
 
-    std::function<void()> click_deselectPiece = [&]() {
+    OnClickLeft clickLeft_selectPiece = [&]() {
+        std::cout << "Long Live the Queen" << std::endl;
+
+        Task highlightSelectedPosition = [&]() {
+
+            sf::RectangleShape* selectedPosition = new sf::RectangleShape(sf::Vector2f(600 / 8, 600 / 8));
+            selectedPosition->setFillColor(sf::Color(255, 0, 0, 200));
+            selectedPosition->setPosition(bt->getPosition());
+            window.AddTempDrawable(selectedPosition);
+        };
+
+        window.AddTask(highlightSelectedPosition);
+
+        //Reset onHoverExit so highlighted cells don't disappear
+        bt->onHoverExit = []() {};
+
+        //Reset onHoverEnter so to prevent highlight overlap
+        bt->onHoverEnter = []() {};
+
+        //Reset onClick left to avoid repetition (CHANGE FOR IF(BOOL) ??)
+        bt->onClickLeft = [](){};
+    };
+
+    OnClickRight clickRight_deselectPiece = [&]() {
         std::cout << "The Queen is dead" << std::endl;
 
         Task clearSelectedPosition = [&]() {
@@ -326,13 +327,14 @@ void RunWindows()
         window.AddTask(clearSelectedPosition);
 
         //Restore default click and hover lambdas
-        bt->onClick = click_selectPiece;
+        bt->onClickLeft = clickLeft_selectPiece;
         bt->onHoverEnter = hoverEnter_highlightPositions;
         bt->onHoverExit = hoverExit_clearPositions;
     };
 
     //Set default lambdas
-    bt->onClick = click_selectPiece(click_deselectPiece);
+    bt->onClickLeft = clickLeft_selectPiece;
+    bt->onClickRight = clickRight_deselectPiece;
     bt->onHoverEnter = hoverEnter_highlightPositions;
     bt->onHoverExit = hoverExit_clearPositions;
 

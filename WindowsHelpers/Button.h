@@ -5,7 +5,8 @@
 //Void perquè quan cliquem al botó no retorna res
 //Opcionalment, podria rebre si és el botó esquerre o el dret del ratolí, el sender (qui ha desencadenat la lambda,
 //per exemple, quin botó: ens serviria si tinguéssim una sola lambda i la volguéssim passar a 3 botons diferents)
-typedef std::function<void(OnClick onClick)> OnClick;
+typedef std::function<void()> OnClickLeft;
+typedef std::function<void()> OnClickRight;
 typedef std::function<void()> OnHoverEnter;
 typedef std::function<void()> OnHoverExit;
 
@@ -23,7 +24,8 @@ public:
 	//[] = reserva d'espai de memòria
 	//() = els paràmetres de la funció
 	//{} = el codi que fa la funció
-	OnClick onClick = [&onClick](onClick(onClick)){};
+	OnClickLeft onClickLeft = []() {};
+	OnClickRight onClickRight = []() {};
 	OnHoverEnter onHoverEnter = [](){};
 	OnHoverExit onHoverExit = []() {};
 

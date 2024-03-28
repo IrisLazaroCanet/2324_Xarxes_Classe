@@ -125,7 +125,23 @@ void Window::RunWindowsLoop()
 
 						if (_lastClickedDownButton != nullptr && _lastClickedDownButton->CheckBounds(worldPos.x, worldPos.y))
 						{
-							_lastClickedDownButton->onClick();
+							_lastClickedDownButton->onClickLeft();
+						}
+						else
+						{
+							//TODO: Cancel click or drag or others
+						}
+					}
+					else if (event.mouseButton.button == sf::Mouse::Right)
+					{
+						//Com que estem fent un joc en 2D, probablement no mourem el món
+						//Per si de cas, passem el pixel de la posició del ratolí a world coords
+						sf::Vector2i clickPixelPos = { event.mouseButton.x, event.mouseButton.y };
+						sf::Vector2f worldPos = _window.mapPixelToCoords(clickPixelPos);
+
+						if (_lastClickedDownButton != nullptr && _lastClickedDownButton->CheckBounds(worldPos.x, worldPos.y))
+						{
+							_lastClickedDownButton->onClickRight();
 						}
 						else
 						{
