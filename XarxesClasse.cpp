@@ -299,6 +299,20 @@ void RunWindows()
     OnClickLeft clickLeft_selectPiece = [&]() {
         std::cout << "Long Live the Queen" << std::endl;
 
+        //TODO: Crear classe Server i classe Client
+        //TODO: Crear classe NetManager (equivalent a NetEntity?) que s'encarregui d'instanciar els Clients i els Servidors
+        //(encapsular aquest main en una classe)
+        //i que també s'encarregui de guardar-se el socket del server?
+        //Tot aquest codi de lambdas, onClick... -> una part a NetManager (el que sigui comú?), l'altra a Client o a Server
+        //Aquest test de packets a Client -> crida el seu SM 
+        for (TcpSocket* socket : SM->GetAllSockets())
+        {
+            std::string testMessage = "Long live the Queen";
+            Packet testPacket;
+            testPacket << testMessage;
+            socket->Send(Message, testPacket);
+        }
+
         Task highlightSelectedPosition = [&]() {
 
             sf::RectangleShape* selectedPosition = new sf::RectangleShape(sf::Vector2f(600 / 8, 600 / 8));

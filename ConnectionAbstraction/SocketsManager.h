@@ -20,6 +20,10 @@ public:
 	//La classe SocketManager ens ha de servir tant per peer to peer com per a imperatius.
 	bool StartListener(unsigned short port);
 	bool ConnectToServer(std::string ip, unsigned short port);
+
+	//TEST
+	TcpSocket* GetServerSocket();
+	std::list<TcpSocket*> GetAllSockets();
 	
 private:
 	bool _isRunning = false;
@@ -38,6 +42,8 @@ private:
 	//Si volguéssim, podríem posar una llista de OnSocketConnected, però volem tenir-ho centralitzat.
 	//Podem tenir 2 SocketsManager per separat: un que se subscriu als moviments d'escacs, un altre que se subscriu als missatges del chat
 	OnSocketConnected _onSocketConnected;
+
+	TcpSocket* _serverSocket;
 
 	void SelectorLoop();
 	void CheckListener();
