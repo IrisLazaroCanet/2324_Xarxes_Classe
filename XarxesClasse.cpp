@@ -21,7 +21,7 @@ int main()
 
     char mode = ' ';
 
-    RunWindows();
+    //RunWindows();
 
     do
     {
@@ -127,7 +127,7 @@ void RunServer()
 {
     std::cout << "Server" << std::endl;
 
-    Chat* chat = Chat::Server(port);
+    //Chat* chat = Chat::Server(port);
 
     SocketsManager* SM = new SocketsManager([](TcpSocket* socket)
         {

@@ -6,6 +6,7 @@ Button::Button(float x, float y, std::string texturePath)
 	if (!texture.loadFromFile(texturePath))
 	{
 		//Handle error
+		return;
 	}
 
 	//Si volem, podem comprovar que la textura sigui prou gran.

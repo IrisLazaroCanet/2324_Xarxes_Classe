@@ -19,7 +19,7 @@ void SocketsManager::StartLoop()
 {
 	_isRunningMutex.lock();
 
-	if (_isRunning) //Prevent multiples loops
+	if (_isRunning) //Prevent multiple loops
 	{
 		_isRunningMutex.unlock();
 		return;
@@ -79,7 +79,7 @@ void SocketsManager::SelectorLoop()
 	bool isRunning = true;
 	_isRunningMutex.unlock();
 
-	do
+	while (isRunning)
 	{
 		if (_selector.Wait())
 		{
@@ -90,7 +90,7 @@ void SocketsManager::SelectorLoop()
 		_isRunningMutex.lock();
 		isRunning = _isRunning;
 		_isRunningMutex.unlock();
-	} while (isRunning);
+	}
 }
 
 void SocketsManager::CheckListener()
