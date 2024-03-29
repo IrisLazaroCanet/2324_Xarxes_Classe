@@ -17,7 +17,9 @@ int main()
 
     char mode = ' ';
 
-    RunWindows();
+    std::thread* windowsThread = new std::thread(RunWindows);
+    windowsThread->detach();
+    //RunWindows();
 
     do
     {
