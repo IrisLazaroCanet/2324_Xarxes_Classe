@@ -18,5 +18,10 @@ private:
 	OnClick _unSelectPiece;
 	OnClick _pieceMoved;
 	OnClick _promotion;
-	OnClick _castle;	
+	OnClick _castle;
+
+	std::vector<vector2> GetMoveOptions(vector2* c);
+
+	void MovePiece(vector2* from, vector2* to);
+	void DeselectPiece(vector2* pos);
 };

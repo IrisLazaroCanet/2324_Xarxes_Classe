@@ -1,5 +1,4 @@
 #pragma once
-#include "Piece.h"
 #include "WindowsHelpers/Button.h"
 class Cell {
 private:
@@ -13,6 +12,7 @@ public:
 	vector2 pos;
 	bool hasPiece();
 	Piece* getPiece();
+	void setPiece(Piece* newPiece);
 	OnClick getOnclick();
 	void setOnclick(OnClick function);
 };

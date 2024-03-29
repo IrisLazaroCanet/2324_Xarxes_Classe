@@ -31,6 +31,11 @@ Piece* Cell::getPiece()
     return _piece;
 }
 
+void Cell::setPiece(Piece* newPiece)
+{
+    _piece = newPiece;
+}
+
 OnClick Cell::getOnclick()
 {
     return _button->onClick;

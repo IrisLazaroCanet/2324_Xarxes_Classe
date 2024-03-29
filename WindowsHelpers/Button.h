@@ -1,8 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <functional>
+#include "Piece.h"
 
-typedef std::function<void()> OnClick;
+typedef std::function<void(vector2* p, vector2* p2)> OnClick;
 
 class Button : public sf::Sprite
 {
@@ -23,7 +24,7 @@ public:
 	//[] = reserva d'espai de memòria
 	//() = els paràmetres de la funció
 	//{} = el codi que fa la funció
-	OnClick onClick = [](){};
+	OnClick onClick = [](vector2* p, vector2* p2){};
 
 	//No li passem width ni height perquè per defecte agafem els de la textura
 	//Considerar la possibilitat de passar-li la textura ja carregada.

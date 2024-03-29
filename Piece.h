@@ -27,5 +27,4 @@ public:
 	bool isWhite;
 	pieceType type;
 	std::string spritepath;
-	virtual std::vector<vector2> GetMoveOptions(Grid* grid, vector2 p);
 };

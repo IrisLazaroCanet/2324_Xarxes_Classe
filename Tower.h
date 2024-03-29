@@ -7,6 +7,4 @@ public:
 	~Tower();
 
 	bool moved;
-	virtual std::vector<vector2> GetMoveOptions(Grid* grid, vector2 p) override;
-
 };
