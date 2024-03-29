@@ -96,7 +96,7 @@ void Window::RunWindowsLoop()
 
 						if (_lastClickedDownButton != nullptr && _lastClickedDownButton->CheckBounds(worldPos.x, worldPos.y))
 						{
-							_lastClickedDownButton->onClick();
+							//_lastClickedDownButton->onClick();
 						}
 						else
 						{

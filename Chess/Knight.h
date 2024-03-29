@@ -4,5 +4,4 @@
 class Knight: public Piece {
 public:
 	Knight(bool w);
-	~Knight();
 };

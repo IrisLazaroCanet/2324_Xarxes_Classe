@@ -4,7 +4,6 @@
 class King : public Piece {
 public:
 	King(bool w);
-	~King();
 
 	bool moved;
 };

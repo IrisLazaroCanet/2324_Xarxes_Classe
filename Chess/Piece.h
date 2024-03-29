@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "Grid.h"
 
 struct vector2
 {
@@ -21,8 +20,7 @@ enum pieceType
 
 class Piece {
 public:
-	Piece();
-	~Piece();
+	Piece() = default;
 
 	bool isWhite;
 	pieceType type;

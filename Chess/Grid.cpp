@@ -23,8 +23,8 @@ Grid::Grid()
         {
             if (this->cells[p->y][p->x + 1]->getPiece() == nullptr &&
                 this->cells[p->y][p->x + 2]->getPiece() == nullptr &&
-                dynamic_cast<King*>(this->cells[p->y][p->x]->getPiece())->moved == false &&
-                dynamic_cast<Tower*>(this->cells[p->y][p->x]->getPiece())->moved == false)
+                static_cast<King*>(this->cells[p->y][p->x]->getPiece())->moved == false &&
+                static_cast<Tower*>(this->cells[p->y][p->x]->getPiece())->moved == false)
             {
                 //Falten els botons en vermell
                 this->cells[p->y][p->x + 2]->setOnclick(_castle);
@@ -32,8 +32,8 @@ Grid::Grid()
             else if (this->cells[p->y][p->x - 1]->getPiece() == nullptr &&
                 this->cells[p->y][p->x - 2]->getPiece() == nullptr &&
                 this->cells[p->y][p->x - 3]->getPiece() == nullptr &&
-                dynamic_cast<King*>(this->cells[p->y][p->x]->getPiece())->moved == false &&
-                dynamic_cast<Tower*>(this->cells[p->y][p->x]->getPiece())->moved == false)
+                static_cast<King*>(this->cells[p->y][p->x]->getPiece())->moved == false &&
+                static_cast<Tower*>(this->cells[p->y][p->x]->getPiece())->moved == false)
             {
                 //Falten els botons en vermell
                 this->cells[p->y][p->x -3]->setOnclick(_castle);
@@ -509,9 +509,9 @@ void Grid::MovePiece(vector2* from, vector2* to)
 
     //Si és torre o rei posem el moved a true
     if (cells[from->y][from->x]->getPiece()->type == KING)
-        dynamic_cast<King*>(cells[from->y][from->x]->getPiece())->moved = true;
+        static_cast<King*>(cells[from->y][from->x]->getPiece())->moved = true;
     else if (cells[from->y][from->x]->getPiece()->type == TOWER)
-        dynamic_cast<Tower*>(cells[from->y][from->x]->getPiece())->moved = true;
+        static_cast<Tower*>(cells[from->y][from->x]->getPiece())->moved = true;
 
 
     cells[from->y][from->x]->setOnclick(nullptr);
@@ -522,49 +522,49 @@ void Grid::MovePiece(vector2* from, vector2* to)
 
 void Grid::DeselectPiece(vector2* p)
 {
-    std::vector<vector2> locations = this->cells[p->y][p->x]->getPiece()->GetMoveOptions(this, p);
+    std::vector<vector2> locations = GetMoveOptions(p);
 
     for (int i = 0; i < locations.size(); i++)
     {
         //Falta treure els botons en vermell
-        this->cells[locations[i].x][locations[i].y]->setOnclick(nullptr);
+        cells[locations[i].x][locations[i].y]->setOnclick(nullptr);
     }
 
 
     //Castle Case
-    if (this->cells[p->y][p->x]->getPiece()->type == KING)
+    if (cells[p->y][p->x]->getPiece()->type == KING)
     {
-        if (this->cells[p->y][p->x + 1]->getPiece() == nullptr &&
-            this->cells[p->y][p->x + 2]->getPiece() == nullptr &&
-            dynamic_cast<King*>(this->cells[p->y][p->x]->getPiece())->moved == false &&
-            dynamic_cast<Tower*>(this->cells[p->y][p->x]->getPiece())->moved == false)
+        if (cells[p->y][p->x + 1]->getPiece() == nullptr &&
+            cells[p->y][p->x + 2]->getPiece() == nullptr &&
+            static_cast<King*>(cells[p->y][p->x]->getPiece())->moved == false &&
+            static_cast<Tower*>(cells[p->y][p->x]->getPiece())->moved == false)
         {
             //Falta treure els botons en vermell
-            this->cells[p->y][p->x + 2]->setOnclick(nullptr);
+            cells[p->y][p->x + 2]->setOnclick(nullptr);
         }
-        else if (this->cells[p->y][p->x - 1]->getPiece() == nullptr &&
-            this->cells[p->y][p->x - 2]->getPiece() == nullptr &&
-            this->cells[p->y][p->x - 3]->getPiece() == nullptr &&
-            dynamic_cast<King*>(this->cells[p->y][p->x]->getPiece())->moved == false &&
-            dynamic_cast<Tower*>(this->cells[p->y][p->x]->getPiece())->moved == false)
+        else if (cells[p->y][p->x - 1]->getPiece() == nullptr &&
+            cells[p->y][p->x - 2]->getPiece() == nullptr &&
+            cells[p->y][p->x - 3]->getPiece() == nullptr &&
+            static_cast<King*>(cells[p->y][p->x]->getPiece())->moved == false &&
+            static_cast<Tower*>(cells[p->y][p->x]->getPiece())->moved == false)
         {
             //Falta treure els botons en vermell
-            this->cells[p->y][p->x - 3]->setOnclick(nullptr);
+            cells[p->y][p->x - 3]->setOnclick(nullptr);
         }
     }
 
     //Promotion case
-    else if (this->cells[p->y][p->x]->getPiece()->type == PAWN)
+    else if (cells[p->y][p->x]->getPiece()->type == PAWN)
     {
-        if (p->y == 1 && this->cells[p->y][p->x]->getPiece()->isWhite == true)
+        if (p->y == 1 && cells[p->y][p->x]->getPiece()->isWhite == true)
         {
             //Falta treure els botons en vermell
-            this->cells[0][p->x]->setOnclick(nullptr);
+            cells[0][p->x]->setOnclick(nullptr);
         }
-        else if (p->y == 6 && this->cells[p->y][p->x]->getPiece()->isWhite == false)
+        else if (p->y == 6 && cells[p->y][p->x]->getPiece()->isWhite == false)
         {
             //Falta treure els botons en vermell
-            this->cells[7][p->x]->setOnclick(nullptr);
+            cells[7][p->x]->setOnclick(nullptr);
         }
     }
 }

@@ -1,5 +1,5 @@
 #pragma once
-#include "WindowsHelpers/Button.h"
+#include "../WindowsHelpers/Button.h"
 class Cell {
 private:
 	Piece* _piece;

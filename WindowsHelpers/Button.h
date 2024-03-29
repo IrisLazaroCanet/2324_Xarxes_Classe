@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <functional>
-#include "Piece.h"
+#include "../Chess/Piece.h"
 
 typedef std::function<void(vector2* p, vector2* p2)> OnClick;
 

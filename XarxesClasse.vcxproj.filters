@@ -51,28 +51,28 @@
     <ClCompile Include="WindowsHelpers\Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cell.cpp">
+    <ClCompile Include="Chess\Bishop.cpp">
       <Filter>Source Files\Chess</Filter>
     </ClCompile>
-    <ClCompile Include="Grid.cpp">
+    <ClCompile Include="Chess\Cell.cpp">
       <Filter>Source Files\Chess</Filter>
     </ClCompile>
-    <ClCompile Include="Bishop.cpp">
+    <ClCompile Include="Chess\Grid.cpp">
       <Filter>Source Files\Chess</Filter>
     </ClCompile>
-    <ClCompile Include="King.cpp">
+    <ClCompile Include="Chess\King.cpp">
       <Filter>Source Files\Chess</Filter>
     </ClCompile>
-    <ClCompile Include="Knight.cpp">
+    <ClCompile Include="Chess\Knight.cpp">
       <Filter>Source Files\Chess</Filter>
     </ClCompile>
-    <ClCompile Include="Tower.cpp">
+    <ClCompile Include="Chess\Pawn.cpp">
       <Filter>Source Files\Chess</Filter>
     </ClCompile>
-    <ClCompile Include="Pawn.cpp">
+    <ClCompile Include="Chess\Queen.cpp">
       <Filter>Source Files\Chess</Filter>
     </ClCompile>
-    <ClCompile Include="Queen.cpp">
+    <ClCompile Include="Chess\Tower.cpp">
       <Filter>Source Files\Chess</Filter>
     </ClCompile>
   </ItemGroup>
@@ -107,34 +107,34 @@
     <ClInclude Include="Chess\Protocol.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Piece.h">
+    <ClInclude Include="Chess\Bishop.h">
       <Filter>Header Files\Chess</Filter>
     </ClInclude>
-    <ClInclude Include="King.h">
+    <ClInclude Include="Chess\Cell.h">
       <Filter>Header Files\Chess</Filter>
     </ClInclude>
-    <ClInclude Include="Pawn.h">
+    <ClInclude Include="Chess\Game.h">
       <Filter>Header Files\Chess</Filter>
     </ClInclude>
-    <ClInclude Include="Queen.h">
+    <ClInclude Include="Chess\Grid.h">
       <Filter>Header Files\Chess</Filter>
     </ClInclude>
-    <ClInclude Include="Knight.h">
+    <ClInclude Include="Chess\King.h">
       <Filter>Header Files\Chess</Filter>
     </ClInclude>
-    <ClInclude Include="Bishop.h">
+    <ClInclude Include="Chess\Knight.h">
       <Filter>Header Files\Chess</Filter>
     </ClInclude>
-    <ClInclude Include="Tower.h">
+    <ClInclude Include="Chess\Pawn.h">
       <Filter>Header Files\Chess</Filter>
     </ClInclude>
-    <ClInclude Include="Cell.h">
+    <ClInclude Include="Chess\Piece.h">
       <Filter>Header Files\Chess</Filter>
     </ClInclude>
-    <ClInclude Include="Grid.h">
+    <ClInclude Include="Chess\Queen.h">
       <Filter>Header Files\Chess</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
+    <ClInclude Include="Chess\Tower.h">
       <Filter>Header Files\Chess</Filter>
     </ClInclude>
   </ItemGroup>

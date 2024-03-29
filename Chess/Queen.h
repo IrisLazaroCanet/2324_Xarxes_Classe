@@ -4,5 +4,4 @@
 class Queen : public Piece {
 public:
 	Queen(bool w);
-	~Queen();
 };

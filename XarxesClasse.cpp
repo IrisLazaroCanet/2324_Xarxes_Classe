@@ -240,10 +240,10 @@ void RunWindows()
 
     Window window;
     
-    Button* bt = new Button(50, 20, "Pieces/QG.png");
-    bt->onClick = []() {
+    Button* bt = new Button(50, 20, "../Pieces/QG.png");
+ /*   bt->onClick = []() {
         std::cout << std::endl << "Long Live the Queen" << std::endl;
-    };
+    };*/
 
     window.AddButton(bt);
     window.RunWindowsLoop();

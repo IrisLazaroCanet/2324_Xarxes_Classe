@@ -4,5 +4,4 @@
 class Pawn : public Piece {
 public:
 	Pawn(bool w);
-	~Pawn();
 };
