@@ -5,6 +5,7 @@ private:
 	Piece* _piece;
 	Button* _button;
 public:
+	Cell() { }
 	Cell(vector2 position);
 	Cell(Piece* p, Button* b, vector2 position);
 	~Cell();

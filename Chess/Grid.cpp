@@ -103,10 +103,14 @@ Grid::Grid()
         }
     };
 
-
     //Inicialitzar cel·les buides
+    //std::vector<std::vector<Cell*>> cells;
+
     for (int i = 0; i < 8; i++)
     {
+        //To avoid vector subscript out of range
+        cells.push_back(std::vector<Cell*>(8, new Cell()));
+
         for (int j = 0; j < 8; j++)
         {
             vector2 pos;

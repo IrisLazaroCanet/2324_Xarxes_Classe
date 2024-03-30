@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Chess\Bishop.cpp" />
     <ClCompile Include="Chess\Cell.cpp" />
+    <ClCompile Include="Chess\Game.cpp" />
     <ClCompile Include="Chess\Grid.cpp" />
     <ClCompile Include="Chess\King.cpp" />
     <ClCompile Include="Chess\Knight.cpp" />

@@ -75,6 +75,9 @@
     <ClCompile Include="Chess\Tower.cpp">
       <Filter>Source Files\Chess</Filter>
     </ClCompile>
+    <ClCompile Include="Chess\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleControl.h">
