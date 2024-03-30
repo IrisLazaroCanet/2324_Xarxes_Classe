@@ -4,5 +4,9 @@ Pawn::Pawn(bool w)
 {
 	isWhite = w;
 	type = PAWN;
-	spritepath;
+	
+	if (w)
+		spritepath = "../Pieces/PawnG.png";
+	else
+		spritepath = "../Pieces/PawnS.png";
 }

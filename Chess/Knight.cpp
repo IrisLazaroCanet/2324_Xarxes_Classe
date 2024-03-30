@@ -4,5 +4,9 @@ Knight::Knight(bool w)
 {
 	isWhite = w;
 	type = KNIGHT;
-	spritepath;
+	
+	if (w)
+		spritepath = "../Pieces/KnightG.png";
+	else
+		spritepath = "../Pieces/KnightS.png";
 }

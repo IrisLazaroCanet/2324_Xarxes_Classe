@@ -4,5 +4,9 @@ Bishop::Bishop(bool w)
 {
 	isWhite = w;
 	type = BISHOP;
-	spritepath;
+
+	if (w)
+		spritepath = "../Pieces/BishopG.png";
+	else
+		spritepath = "../Pieces/BishopS.png";
 }

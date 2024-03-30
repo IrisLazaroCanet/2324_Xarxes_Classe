@@ -33,5 +33,5 @@ void Game::Init(Window& window)
         }
     };
 
-    window.AddTask(drawBoard);
+    //window.AddTask(drawBoard);
 }
