@@ -3,6 +3,8 @@
 
 #include "SocketSelector.h"
 
+enum PackagesIds : Packet::PacketKey { Message = 0 };
+
 class SocketsManager
 {
 public:

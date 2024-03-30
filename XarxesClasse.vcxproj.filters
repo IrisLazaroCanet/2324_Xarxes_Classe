@@ -78,6 +78,12 @@
     <ClCompile Include="Chess\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ConnectionAbstraction\Server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnectionAbstraction\Client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleControl.h">
@@ -139,6 +145,12 @@
     </ClInclude>
     <ClInclude Include="Chess\Tower.h">
       <Filter>Header Files\Chess</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectionAbstraction\Server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectionAbstraction\Client.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

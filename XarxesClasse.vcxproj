@@ -148,6 +148,8 @@
     <ClCompile Include="Chess\Pawn.cpp" />
     <ClCompile Include="Chess\Queen.cpp" />
     <ClCompile Include="Chess\Tower.cpp" />
+    <ClCompile Include="ConnectionAbstraction\Client.cpp" />
+    <ClCompile Include="ConnectionAbstraction\Server.cpp" />
     <ClCompile Include="WindowsHelpers\Button.cpp" />
     <ClCompile Include="Chat.cpp" />
     <ClCompile Include="ConsoleControl.cpp" />
@@ -171,6 +173,8 @@
     <ClInclude Include="Chess\Protocol.h" />
     <ClInclude Include="Chess\Queen.h" />
     <ClInclude Include="Chess\Tower.h" />
+    <ClInclude Include="ConnectionAbstraction\Client.h" />
+    <ClInclude Include="ConnectionAbstraction\Server.h" />
     <ClInclude Include="WindowsHelpers\Button.h" />
     <ClInclude Include="Chat.h" />
     <ClInclude Include="ConsoleControl.h" />

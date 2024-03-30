@@ -6,6 +6,8 @@
 #include "Chat.h"
 #include "ConsoleControl.h"
 #include "ConnectionAbstraction/SocketsManager.h"
+#include "ConnectionAbstraction/Server.h"
+#include "ConnectionAbstraction/Client.h"
 #include "WindowsHelpers/Window.h"
 #include "Chess/Game.h"
 
@@ -13,8 +15,6 @@ unsigned short port = 3000;
 void RunClient();
 void RunServer();
 void RunWindows();
-
-enum PackagesIds : Packet::PacketKey { Message = 0 };
 
 int main()
 {
@@ -59,154 +59,12 @@ int main()
 
 void RunClient()
 {
-    std::cout << "Client" << std::endl;
-    std::cout << "Set server IP --> " << std::endl;
-
-    std::string ip;
-    std::getline(std::cin, ip);
-
-    SocketsManager* SM = new SocketsManager([](TcpSocket* socket)
-        {
-            std::cout << std::endl << "Socket Connected: " << socket->getRemoteAddress().toString();
-
-            socket->Subscribe(Message, [socket](Packet packet)
-                {
-                    std::string message;
-                    packet >> message;
-                    std::cout << std::endl << "New Message: " << message;
-                });
-
-            socket->SubscribeOnDisconnect([](TcpSocket* socket)
-                {
-                    std::cout << std::endl << "Socket disconnected: " << socket->getRemoteAddress().toString();
-                });
-
-            std::string message = "Hola soy el cliente";
-            Packet packet;
-            packet << message;
-
-            socket->Send(Message, packet);
-
-        });
-
-    if (SM->ConnectToServer(ip, port))
-    {
-        SM->StartLoop();
-    }
-
-    //OLD
-    /*sf::TcpSocket socket;
-    sf::Socket::Status status = socket.connect("10.40.1.123", port);
-
-    if (status != sf::Socket::Done)
-    {
-        std::cout << std::endl << "Error on connect to server";
-        return;
-    }
-
-    while (true)
-    {
-        std::cout << std::endl << "Next Message: ";
-        std::string message;
-        std::getline(std::cin, message);
-
-        char data[100];
-
-        int stringSize = message.length();
-        for (int i = 0; i < stringSize; i++)
-        {
-            char c = message[i];
-            data[i] = c;
-        }
-
-        if (socket.send(data, 100) != sf::Socket::Done)
-        {
-            std::cout << std::endl << "Error Sending Message";
-        }
-    }*/
+    Client* client = new Client(port);
 }
 
 void RunServer()
 {
-    std::cout << "Server" << std::endl;
-
-    //Chat* chat = Chat::Server(port);
-
-    SocketsManager* SM = new SocketsManager([](TcpSocket* socket)
-        {
-            std::cout << std::endl << "Socket Connected: " << socket->getRemoteAddress().toString();
-
-            socket->Subscribe(Message, [socket](Packet packet)
-                {
-                    std::string message;
-                    packet >> message;
-                    std::cout << std::endl << "New Message: " << message;
-
-                    std::string response = "Pues yo soy el server";
-                    Packet responsePacket;
-                    responsePacket << response;
-
-                    socket->Send(Message, responsePacket);
-                });
-
-            socket->SubscribeOnDisconnect([](TcpSocket* socket)
-                {
-                    std::cout << std::endl << "Socket disconnected: " << socket->getRemoteAddress().toString();
-                });
-        });
-
-    if (SM->StartListener(port))
-    {
-        sf::IpAddress ipAddress = sf::IpAddress::getLocalAddress();
-        std::cout << "Listening on IP: " << ipAddress.toString();
-        SM->StartLoop();
-    }
-
-    /*sf::TcpListener listener;
-
-    if (listener.listen(port) != sf::Socket::Done)
-    {
-        std::cout << std::endl << "Error on start listener";
-        return;
-    }
-    sf::IpAddress ipAdress = sf::IpAddress::getLocalAddress();  //El client sha de conectar a tu, aixi que has de saber la ip previament
-    //En aquest cas es red local
-
-    std::cout << std::endl << "Listening on IP: " + ipAdress.toString();
-
-    sf::TcpSocket client;
-
-    if (listener.accept(client) != sf::Socket::Done)
-    {
-        std::cout << std::endl << "Error on accept client";
-        return;
-    }
-
-    std::cout << std::endl << "Client Connected " << client.getRemoteAddress().toString();
-
-    while (true)
-    {
-        char data[100];
-        std::size_t received;
-
-        std::string message;
-
-        if (client.receive(data, 100, received) != sf::Socket::Done)
-        {
-            std::cout << std::endl << "Error recieve message";
-        }
-        else
-        {
-            for (size_t i = 0; i < received; i++)
-            {
-                char c = data[i];
-                message += c;
-
-
-                std::cout << std::endl << message;
-            }
-        }
-    }*/
+    Server* server = new Server(port);   
 }
 
 void RunWindows()
@@ -281,6 +139,7 @@ void RunWindows()
     OnClickLeft clickLeft_selectPiece = [&]() {
         std::cout << "Long Live the Queen" << std::endl;
 
+        /*
         //TODO: Crear classe Server i classe Client
         //TODO: Crear classe NetManager (equivalent a NetEntity?) que s'encarregui d'instanciar els Clients i els Servidors
         //(encapsular aquest main en una classe)
@@ -294,6 +153,7 @@ void RunWindows()
             testPacket << testMessage;
             socket->Send(Message, testPacket);
         }
+        */
 
         Task highlightSelectedPosition = [&]() {
 
