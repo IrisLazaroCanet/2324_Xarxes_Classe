@@ -6,10 +6,12 @@ Server::Server(unsigned short port)
 
     //Chat* chat = Chat::Server(port);
 
-    SocketsManager* SM = new SocketsManager([](TcpSocket* socket)
+    SM = new SocketsManager([this](TcpSocket* socket)
         {
+            //Printar per consola que s'ha connectat un socket, i la seva ip
             std::cout << std::endl << "Socket Connected: " << socket->getRemoteAddress().toString();
 
+            //El socket se subscriu a rebre missages. Quan rebi un missatge, el printarà per consola.
             socket->Subscribe(Message, [socket](Packet packet)
                 {
                     std::string message;
@@ -23,10 +25,13 @@ Server::Server(unsigned short port)
                     socket->Send(Message, responsePacket);
                 });
 
+            //El socket se subscriu a desconnectar-se. Quan es desconnecti, es printarà per consola que s'ha desconnectat un socket, i la seva ip.
             socket->SubscribeOnDisconnect([](TcpSocket* socket)
                 {
                     std::cout << std::endl << "Socket disconnected: " << socket->getRemoteAddress().toString();
                 });
+
+            _chat = new NewChat(SM, true, socket);
         });
 
     if (SM->StartListener(port))

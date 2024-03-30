@@ -165,6 +165,8 @@ void SocketsManager::AddSocket(TcpSocket* socket)
 		RemoveSocketAsync(socket);	
 	});
 
+	std::cout << "Num sockets: " << _sockets.size() << std::endl;
+
 	_socketsMutex.unlock();
 }
 

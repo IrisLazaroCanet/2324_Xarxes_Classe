@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Chat\NewChat.cpp" />
     <ClCompile Include="Chess\Bishop.cpp" />
     <ClCompile Include="Chess\Cell.cpp" />
     <ClCompile Include="Chess\Game.cpp" />
@@ -150,6 +151,7 @@
     <ClCompile Include="Chess\Tower.cpp" />
     <ClCompile Include="ConnectionAbstraction\Client.cpp" />
     <ClCompile Include="ConnectionAbstraction\Server.cpp" />
+    <ClCompile Include="ConnectionAbstraction\NetManager.cpp" />
     <ClCompile Include="WindowsHelpers\Button.cpp" />
     <ClCompile Include="Chat.cpp" />
     <ClCompile Include="ConsoleControl.cpp" />
@@ -162,6 +164,7 @@
     <ClCompile Include="XarxesClasse.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Chat\NewChat.h" />
     <ClInclude Include="Chess\Bishop.h" />
     <ClInclude Include="Chess\Cell.h" />
     <ClInclude Include="Chess\Game.h" />
@@ -175,6 +178,7 @@
     <ClInclude Include="Chess\Tower.h" />
     <ClInclude Include="ConnectionAbstraction\Client.h" />
     <ClInclude Include="ConnectionAbstraction\Server.h" />
+    <ClInclude Include="ConnectionAbstraction\NetManager.h" />
     <ClInclude Include="WindowsHelpers\Button.h" />
     <ClInclude Include="Chat.h" />
     <ClInclude Include="ConsoleControl.h" />
