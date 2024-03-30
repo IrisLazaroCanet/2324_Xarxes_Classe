@@ -13,6 +13,10 @@ NewChat::NewChat(SocketsManager* SM, bool isServer, TcpSocket* socket)
 	{
 		//Escoltar missatges pels clients
 		//Cada cop que es connecta un client, hem de cridar a ListenMessages per aquell socket
+
+		//Temp: Listen to messages
+		std::thread listenMessageThread = std::thread(&NewChat::ListenMessages, this, socket);
+		listenMessageThread.detach();
 	}
 	else
 	{
@@ -130,6 +134,10 @@ void NewChat::SendMessage(std::string message)
 
 	//Li demanem al SocketManager tots els sockets
 	std::list<TcpSocket*> sockets = _SM->GetAllSockets();
+
+	ConsoleControl::LockMutex();
+	std::cout << "Num sockets: " << sockets.size() << std::endl;
+	ConsoleControl::UnlockMutex();
 
 	for (sf::TcpSocket* socket : sockets)
 	{
