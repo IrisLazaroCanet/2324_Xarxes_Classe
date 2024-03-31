@@ -15,8 +15,8 @@ NewChat::NewChat(SocketsManager* SM, bool isServer, TcpSocket* socket)
 		//Cada cop que es connecta un client, hem de cridar a ListenMessages per aquell socket
 
 		//Temp: Listen to messages
-		std::thread listenMessageThread = std::thread(&NewChat::ListenMessages, this, socket);
-		listenMessageThread.detach();
+		//std::thread listenMessageThread = std::thread(&NewChat::ListenMessages, this, socket);
+		//listenMessageThread.detach();
 	}
 	else
 	{
@@ -24,6 +24,11 @@ NewChat::NewChat(SocketsManager* SM, bool isServer, TcpSocket* socket)
 		std::thread listenMessageThread = std::thread(&NewChat::ListenMessages, this, socket);
 		listenMessageThread.detach();
 	}
+}
+
+void NewChat::OnClientEnter(TcpSocket* socket)
+{
+	ListenMessages(socket);
 }
 
 void NewChat::ShowMessage(std::string message)

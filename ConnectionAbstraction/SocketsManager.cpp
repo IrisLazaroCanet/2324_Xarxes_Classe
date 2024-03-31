@@ -73,6 +73,16 @@ bool SocketsManager::ConnectToServer(std::string ip, unsigned short port)
 	return true;
 }
 
+void SocketsManager::TryToSetServerSocket(TcpSocket* socket)
+{
+	_serverSocketMutex.lock();
+
+	if (_serverSocket == nullptr)
+		_serverSocket = socket;
+
+	_serverSocketMutex.unlock();
+}
+
 TcpSocket* SocketsManager::GetServerSocket()
 {
 	return _serverSocket;
@@ -144,9 +154,6 @@ void SocketsManager::CheckSockets()
 void SocketsManager::AddSocket(TcpSocket* socket)
 {
 	_socketsMutex.lock();
-
-	if (_sockets.empty())
-		_serverSocket = socket;
 
 	_sockets.push_back(socket);
 	_selector.Add(*socket);			//Perquè pugui escoltar si hi ha hagut canvis al socket

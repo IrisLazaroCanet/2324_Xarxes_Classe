@@ -13,6 +13,7 @@ class NewChat
 {
 public:
 	NewChat(SocketsManager* SM, bool isServer, TcpSocket* socket);
+	void OnClientEnter(TcpSocket* socket);
 
 private:
 	SocketsManager* _SM;

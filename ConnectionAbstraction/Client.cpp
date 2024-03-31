@@ -13,29 +13,28 @@ Client::Client(unsigned short port)
             //Printar per consola que s'ha connectat un socket, i la seva ip
             std::cout << std::endl << "Socket Connected: " << socket->getRemoteAddress().toString();
 
-            //El socket se subscriu a rebre missages. Quan rebi un missatge, el printarà per consola.
+            //Què ha de fer el socket quan rep un packet tipus Message?
             socket->Subscribe(Message, [socket](Packet packet)
                 {
+                    //Simplement desempaquetar-lo i printar el missatge per pantalla
                     std::string message;
                     packet >> message;
                     std::cout << std::endl << "New Message: " << message;
                 });
 
-            //El socket se subscriu a desconnectar-se. Quan es desconnecti, es printarà per consola que s'ha desconnectat un socket, i la seva ip.
+            //Què ha de fer el socket quan es desconnecti?
             socket->SubscribeOnDisconnect([](TcpSocket* socket)
                 {
+                    //Printar per consola la seva ip.
                     std::cout << std::endl << "Socket disconnected: " << socket->getRemoteAddress().toString();
                 });
 
-            //El socket envia un missatge.
+            //El SM del Client envia al socket que s'acaba de connectar el missatge "Hola soy el cliente"
             std::string message = "Hola soy el cliente";
             Packet packet;
             packet << message;
 
             socket->Send(Message, packet);
-
-            //Es crea un chat per aquell socket
-            _chat = new NewChat(SM, false, socket);
         });
 
     if (SM->ConnectToServer(ip, port))

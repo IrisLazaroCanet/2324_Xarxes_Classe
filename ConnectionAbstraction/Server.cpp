@@ -11,13 +11,15 @@ Server::Server(unsigned short port)
             //Printar per consola que s'ha connectat un socket, i la seva ip
             std::cout << std::endl << "Socket Connected: " << socket->getRemoteAddress().toString();
 
-            //El socket se subscriu a rebre missages. Quan rebi un missatge, el printarà per consola.
+            //Què fer quan es rep un packet amb key Message?
             socket->Subscribe(Message, [socket](Packet packet)
                 {
+                    //Desempaquetar i printar el missatge per consola
                     std::string message;
                     packet >> message;
                     std::cout << std::endl << "New Message: " << message;
 
+                    //Respondre amb "Pues yo soy el server"
                     std::string response = "Pues yo soy el server";
                     Packet responsePacket;
                     responsePacket << response;
@@ -25,13 +27,24 @@ Server::Server(unsigned short port)
                     socket->Send(Message, responsePacket);
                 });
 
-            //El socket se subscriu a desconnectar-se. Quan es desconnecti, es printarà per consola que s'ha desconnectat un socket, i la seva ip.
+            //Què ha de fer el socket quan es desconnecti?
             socket->SubscribeOnDisconnect([](TcpSocket* socket)
                 {
+                    //Printar per consola la seva ip.
                     std::cout << std::endl << "Socket disconnected: " << socket->getRemoteAddress().toString();
                 });
 
-            _chat = new NewChat(SM, true, socket);
+            //Guardar-se el socket del server
+            //Si és el primer socket en connectar-se, ha de ser per força el server.
+            SM->TryToSetServerSocket(socket);
+            
+            //El SM del Server envia "Hola soy el server" al socket que s'acaba de connectar
+            /*
+            std::string message = "Hola soy el server";
+            Packet messagePacket;
+            messagePacket << message;
+            socket->Send(Message, messagePacket);
+            */
         });
 
     if (SM->StartListener(port))

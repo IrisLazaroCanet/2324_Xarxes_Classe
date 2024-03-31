@@ -25,6 +25,7 @@ public:
 	bool ConnectToServer(std::string ip, unsigned short port);
 
 	//TEST
+	void TryToSetServerSocket(TcpSocket* socket);
 	TcpSocket* GetServerSocket();
 	std::list<TcpSocket*> GetAllSockets();
 	
@@ -47,6 +48,7 @@ private:
 	OnSocketConnected _onSocketConnected;
 
 	TcpSocket* _serverSocket;
+	std::mutex _serverSocketMutex;
 
 	void SelectorLoop();
 	void CheckListener();
