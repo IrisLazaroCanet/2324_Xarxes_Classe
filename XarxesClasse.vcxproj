@@ -139,6 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Chess\Bishop.cpp" />
+    <ClCompile Include="Chess\Cell.cpp" />
+    <ClCompile Include="Chess\Grid.cpp" />
+    <ClCompile Include="Chess\King.cpp" />
+    <ClCompile Include="Chess\Knight.cpp" />
+    <ClCompile Include="Chess\Pawn.cpp" />
+    <ClCompile Include="Chess\Queen.cpp" />
+    <ClCompile Include="Chess\Tower.cpp" />
     <ClCompile Include="WindowsHelpers\Button.cpp" />
     <ClCompile Include="Chat.cpp" />
     <ClCompile Include="ConsoleControl.cpp" />
@@ -151,7 +159,17 @@
     <ClCompile Include="XarxesClasse.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Chess\Bishop.h" />
+    <ClInclude Include="Chess\Cell.h" />
+    <ClInclude Include="Chess\Game.h" />
+    <ClInclude Include="Chess\Grid.h" />
+    <ClInclude Include="Chess\King.h" />
+    <ClInclude Include="Chess\Knight.h" />
+    <ClInclude Include="Chess\Pawn.h" />
+    <ClInclude Include="Chess\Piece.h" />
     <ClInclude Include="Chess\Protocol.h" />
+    <ClInclude Include="Chess\Queen.h" />
+    <ClInclude Include="Chess\Tower.h" />
     <ClInclude Include="WindowsHelpers\Button.h" />
     <ClInclude Include="Chat.h" />
     <ClInclude Include="ConsoleControl.h" />
