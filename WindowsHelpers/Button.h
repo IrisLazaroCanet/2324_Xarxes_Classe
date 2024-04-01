@@ -1,9 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <functional>
-#include "../Chess/Piece.h"
-
-typedef std::function<void(vector2* p, vector2* p2)> OnClick;
 
 //Void perquè quan cliquem al botó no retorna res
 //Opcionalment, podria rebre si és el botó esquerre o el dret del ratolí, el sender (qui ha desencadenat la lambda,
@@ -16,10 +13,6 @@ typedef std::function<void()> OnHoverExit;
 class Button : public sf::Sprite
 {
 public:
-	//Void perquè quan cliquem al botó no retorna res
-	//Opcionalment, podria rebre si és el botó esquerre o el dret del ratolí, el sender (qui ha desencadenat la lambda,
-	//per exemple, quin botó: ens serviria si tinguéssim una sola lambda i la volguéssim passar a 3 botons diferents)
-	
 	//La funció lambda no s'executa en el context d'una classe. La podem crear des de qualsevol lloc (és genèrica).
 	//Si volem fer servir objectes de la classe on està declarada, hem de passar-li referències, per exemple [this]
 	
@@ -35,7 +28,6 @@ public:
 	OnClickRight onClickRight = []() {};
 	OnHoverEnter onHoverEnter = [](){};
 	OnHoverExit onHoverExit = []() {};
-	OnClick onClick = [](vector2* p, vector2* p2){};
 
 	//No li passem width ni height perquè per defecte agafem els de la textura
 	//Considerar la possibilitat de passar-li la textura ja carregada.

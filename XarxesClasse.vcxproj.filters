@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Chess">
-      <UniqueIdentifier>{d0777b79-0386-4a5c-b2c7-00a8ef9524fb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Chess">
-      <UniqueIdentifier>{60abff5a-39da-426e-9344-f8f96ad9287e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="XarxesClasse.cpp">
@@ -51,30 +45,6 @@
     <ClCompile Include="WindowsHelpers\Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Chess\Bishop.cpp">
-      <Filter>Source Files\Chess</Filter>
-    </ClCompile>
-    <ClCompile Include="Chess\Cell.cpp">
-      <Filter>Source Files\Chess</Filter>
-    </ClCompile>
-    <ClCompile Include="Chess\Grid.cpp">
-      <Filter>Source Files\Chess</Filter>
-    </ClCompile>
-    <ClCompile Include="Chess\King.cpp">
-      <Filter>Source Files\Chess</Filter>
-    </ClCompile>
-    <ClCompile Include="Chess\Knight.cpp">
-      <Filter>Source Files\Chess</Filter>
-    </ClCompile>
-    <ClCompile Include="Chess\Pawn.cpp">
-      <Filter>Source Files\Chess</Filter>
-    </ClCompile>
-    <ClCompile Include="Chess\Queen.cpp">
-      <Filter>Source Files\Chess</Filter>
-    </ClCompile>
-    <ClCompile Include="Chess\Tower.cpp">
-      <Filter>Source Files\Chess</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleControl.h">
@@ -106,36 +76,6 @@
     </ClInclude>
     <ClInclude Include="Chess\Protocol.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Chess\Bishop.h">
-      <Filter>Header Files\Chess</Filter>
-    </ClInclude>
-    <ClInclude Include="Chess\Cell.h">
-      <Filter>Header Files\Chess</Filter>
-    </ClInclude>
-    <ClInclude Include="Chess\Game.h">
-      <Filter>Header Files\Chess</Filter>
-    </ClInclude>
-    <ClInclude Include="Chess\Grid.h">
-      <Filter>Header Files\Chess</Filter>
-    </ClInclude>
-    <ClInclude Include="Chess\King.h">
-      <Filter>Header Files\Chess</Filter>
-    </ClInclude>
-    <ClInclude Include="Chess\Knight.h">
-      <Filter>Header Files\Chess</Filter>
-    </ClInclude>
-    <ClInclude Include="Chess\Pawn.h">
-      <Filter>Header Files\Chess</Filter>
-    </ClInclude>
-    <ClInclude Include="Chess\Piece.h">
-      <Filter>Header Files\Chess</Filter>
-    </ClInclude>
-    <ClInclude Include="Chess\Queen.h">
-      <Filter>Header Files\Chess</Filter>
-    </ClInclude>
-    <ClInclude Include="Chess\Tower.h">
-      <Filter>Header Files\Chess</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
