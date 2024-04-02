@@ -6,7 +6,7 @@ Pawn::Pawn(bool w)
 	type = PAWN;
 	
 	if (w)
-		spritepath = "../Pieces/PawnG.png";
+		spritepath = "Pieces/PawnG.png";
 	else
-		spritepath = "../Pieces/PawnS.png";
+		spritepath = "Pieces/PawnS.png";
 }

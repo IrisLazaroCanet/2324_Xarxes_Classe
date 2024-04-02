@@ -7,7 +7,7 @@ Tower::Tower(bool w)
 	moved = false;
 
 	if (w)
-		spritepath = "../Pieces/TowerG.png";
+		spritepath = "Pieces/RookG.png";
 	else
-		spritepath = "../Pieces/TowerS.png";
+		spritepath = "Pieces/RookS.png";
 }

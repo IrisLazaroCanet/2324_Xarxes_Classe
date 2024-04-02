@@ -6,7 +6,7 @@ Bishop::Bishop(bool w)
 	type = BISHOP;
 
 	if (w)
-		spritepath = "../Pieces/BishopG.png";
+		spritepath = "Pieces/BishopG.png";
 	else
-		spritepath = "../Pieces/BishopS.png";
+		spritepath = "Pieces/BishopS.png";
 }

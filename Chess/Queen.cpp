@@ -6,7 +6,7 @@ Queen::Queen(bool w)
 	type = QUEEN;
 	
 	if (w)
-		spritepath = "../Pieces/QueenG.png";
+		spritepath = "Pieces/QueenG.png";
 	else
-		spritepath = "../Pieces/QueenS.png";
+		spritepath = "Pieces/QueenS.png";
 }

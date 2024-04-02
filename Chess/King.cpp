@@ -7,7 +7,7 @@ King::King(bool w)
 	moved = false;
 
 	if (w)
-		spritepath = "../Pieces/KingG.png";
+		spritepath = "Pieces/KingG.png";
 	else
-		spritepath = "../Pieces/KingS.png";
+		spritepath = "Pieces/KingS.png";
 }

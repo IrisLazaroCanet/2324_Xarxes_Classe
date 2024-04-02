@@ -6,7 +6,7 @@ Knight::Knight(bool w)
 	type = KNIGHT;
 	
 	if (w)
-		spritepath = "../Pieces/KnightG.png";
+		spritepath = "Pieces/KnightG.png";
 	else
-		spritepath = "../Pieces/KnightS.png";
+		spritepath = "Pieces/KnightS.png";
 }
